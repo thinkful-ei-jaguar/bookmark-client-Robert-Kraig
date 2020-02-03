@@ -48,16 +48,17 @@ onChangerating =e=> {
     const bookmark = {
       title: title.value,
       url: url.value,
-      description: description.value,
+      desc: description.value,
       rating: rating.value,
     }
+    console.log(bookmark);
     this.setState({ error: null })
-    fetch(config.API_ENDPOINT+`${this.props.book.id}`, {
+    fetch(config.API_ENDPOINT+`/${this.props.book.id}`, {
       method: 'PATCH',
       body: JSON.stringify(bookmark),
       headers: {
         'content-type': 'application/json',
-        'authorization': `bearer ${config.API_KEY}`
+        //'authorization': `bearer ${config.API_KEY}`
       }
     })
       .then(res => {
@@ -75,7 +76,7 @@ onChangerating =e=> {
         url.value = ''
         description.value = ''
         rating.value = ''
-        this.props.onEditBookmark(data)
+        this.props.onUpdateBookmark(data)
       })
       .catch(error => {
         this.setState({ error })

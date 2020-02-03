@@ -75,7 +75,7 @@ class App extends Component {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
-        'Authorization': `Bearer ${config.API_KEY}`
+        //'Authorization': `Bearer ${config.API_KEY}`
       }
     })
       .then(res => {
@@ -111,7 +111,7 @@ class App extends Component {
             <EditBookmark
             onClickCancel={() => this.changePage('list')}
             book={this.state.book}
-            onupdateBookmark={this.onupdateBookmark}
+            onUpdateBookmark={this.onUpdateBookmark}
             />
           )}
           

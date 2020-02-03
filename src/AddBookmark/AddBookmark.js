@@ -22,7 +22,7 @@ class AddBookmark extends Component {
     const bookmark = {
       title: title.value,
       url: url.value,
-      description: description.value,
+      desc: description.value,
       rating: rating.value,
     }
     this.setState({ error: null })
@@ -31,7 +31,7 @@ class AddBookmark extends Component {
       body: JSON.stringify(bookmark),
       headers: {
         'content-type': 'application/json',
-        'authorization': `bearer ${config.API_KEY}`
+        //'authorization': `bearer ${config.API_KEY}`
       }
     })
       .then(res => {
