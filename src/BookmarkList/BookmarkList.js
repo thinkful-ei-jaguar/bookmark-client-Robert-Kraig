@@ -16,6 +16,7 @@ class BookmarkList extends Component {
           {bookmarks.map(bookmark =>
             <BookmarkItem
               key={bookmark.id}
+              editBookmark={this.props.editBookmark}
               {...bookmark}
             />
           )}

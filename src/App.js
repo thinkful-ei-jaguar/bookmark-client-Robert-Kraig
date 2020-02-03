@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddBookmark from './AddBookmark/AddBookmark';
 import BookmarkList from './BookmarkList/BookmarkList';
+import EditBookmark from './editBookmark/editbookmark'
 import Nav from './Nav/Nav';
 import config from './config';
 import './App.css';
@@ -34,6 +35,7 @@ class App extends Component {
     page: 'list',
     bookmarks,
     error: null,
+    book:null,
   };
 
   changePage = (page) => {
@@ -45,14 +47,28 @@ class App extends Component {
       bookmarks,
       error: null,
       page: 'list',
+      book:null
     })
   }
-
+  editBookmark = bookmark =>{
+    this.setState({
+      page:'edit',
+      book:bookmark
+    })
+    //console.log(bookmark);
+  }
+  onUpdateBookmark = bookmark =>{
+    this.setState({
+      bookmarks: [ ...this.state.bookmarks],
+    })
+    this.componentDidMount();
+  }
   addBookmark = bookmark => {
     this.setState({
       bookmarks: [ ...this.state.bookmarks, bookmark ],
     })
   }
+
 
   componentDidMount() {
     fetch(config.API_ENDPOINT, {
@@ -88,8 +104,17 @@ class App extends Component {
           {page === 'list' && (
             <BookmarkList
               bookmarks={bookmarks}
+              editBookmark={this.editBookmark}
             />
           )}
+          {page === 'edit' && (
+            <EditBookmark
+            onClickCancel={() => this.changePage('list')}
+            book={this.state.book}
+            onupdateBookmark={this.onupdateBookmark}
+            />
+          )}
+          
         </div>
       </main>
     );
